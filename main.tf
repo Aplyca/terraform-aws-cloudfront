@@ -35,9 +35,9 @@ resource "aws_cloudfront_distribution" "this" {
     }
 
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 604800
+    min_ttl                = "${var.min_ttl}"
+    default_ttl            = "${var.default_ttl}"
+    max_ttl                = "${var.max_ttl}"
   }
 
   tags = "${merge(var.tags, map("Name", "${var.name}"))}"

@@ -43,3 +43,18 @@ variable "certificate" {
   description = "ACM certificate arn"
   default = ""
 }
+
+variable "min_ttl" {
+  description = "Min cache TTL"
+  default     = 0
+}
+
+variable "default_ttl" {
+  description = "Default cache TTL"
+  default = 86400
+}
+
+variable "max_ttl" {
+  description = "Max cache TTL"
+  default = 31536000
+}
