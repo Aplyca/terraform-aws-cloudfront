@@ -12,7 +12,15 @@ resource "aws_cloudfront_distribution" "this" {
   origin {
     domain_name = "${var.origin}"
     origin_id   = "${local.id}"
-    custom_origin_config = ["${var.custom_origin_config}"]
+    dynamic "custom_origin_config" {
+      for_each = var.custom_origin_config.http_port != "" ? list(var.custom_origin_config) : []
+      content {
+        http_port   = var.custom_origin_config.http_port
+        https_port   = var.custom_origin_config.https_port
+        origin_protocol_policy = var.custom_origin_config.origin_protocol_policy
+        origin_ssl_protocols = var.custom_origin_config.origin_ssl_protocols
+      }
+    }
   }
 
   enabled = true
@@ -77,7 +85,7 @@ resource "aws_cloudfront_distribution" "access_identity" {
 
     forwarded_values {
       query_string = true
-      headers = ["${var.forwarded_headers}"]
+      headers = "${var.forwarded_headers}"
 
       cookies {
         forward = "all"
