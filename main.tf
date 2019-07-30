@@ -53,7 +53,7 @@ resource "aws_cloudfront_distribution" "this" {
   viewer_certificate {
     acm_certificate_arn = "${var.certificate}"
     cloudfront_default_certificate = "${var.certificate == "" ? true : false}"
-    ssl_support_method = "sni-only"
+    ssl_support_method = "${var.certificate != "" ? "sni-only" : null}"
   }
 
   restrictions {
@@ -103,7 +103,7 @@ resource "aws_cloudfront_distribution" "access_identity" {
   viewer_certificate {
     acm_certificate_arn = "${var.certificate}"
     cloudfront_default_certificate = "${var.certificate == "" ? true : false}"
-    ssl_support_method = "sni-only"
+    ssl_support_method = "${var.certificate != "" ? "sni-only" : null}"
   }
 
   restrictions {
