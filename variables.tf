@@ -58,3 +58,8 @@ variable "max_ttl" {
   description = "Max cache TTL"
   default = 31536000
 }
+
+variable "minimum_protocol_version" {
+  description = "minimum_protocol_version"
+  default = "TLSv1"
+}
