@@ -103,6 +103,7 @@ resource "aws_cloudfront_distribution" "access_identity" {
   viewer_certificate {
     acm_certificate_arn = "${var.certificate}"
     cloudfront_default_certificate = "${var.certificate == "" ? true : false}"
+    minimum_protocol_version = var.certificate == "" ? "TLSv1" : var.minimum_protocol_version
     ssl_support_method = "${var.certificate != "" ? "sni-only" : null}"
   }
 
