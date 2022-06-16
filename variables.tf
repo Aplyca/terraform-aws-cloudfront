@@ -10,7 +10,7 @@ variable "origin" {
 
 variable "aliases" {
   description = "A list of DNS aliases to associate with."
-  type        = "list"
+  type        = list
   default     = []
 }
 
